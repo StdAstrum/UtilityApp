@@ -1,12 +1,14 @@
 ﻿using UtilityApp.Interface;
 using UtilityApp.Models;
 using UtilityApp.Functional;
+using System.Text;
 
 namespace UtilityApp
 {
     public class Data
     {
-        public static string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        public static string chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+        public static string charsUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static string specialChars = "!@#$%^&*()_+[]{}|;:,.<>?";
 
         // Default values for generation
@@ -28,15 +30,16 @@ namespace UtilityApp
             //     length = 10,
             //     domain = "example.com"
             // }));
-            // Console.WriteLine(genName.generate(new nameModel
-            // {
-            //     length = 10,
-            //     prefix = "user",
-            //     separatorPrefix = '_',
-            //     suffix = "example",
-            //     separatorSuffix = '.',
-            //     specialCharacters = true
-            // }));
+            //Console.WriteLine(genName.generate(new nameModel
+            //{
+            //    length = 4,
+            //    prefix = "user",
+            //    separatorPrefix = '_',
+            //    suffix = "example",
+            //    separatorSuffix = '.',
+            //    //specialCharacters = true,
+            //    isHumanized = true
+            //}));
             // Console.WriteLine(genPhone.generate(new phoneModel
             // {
             //     region = "BG"
@@ -48,6 +51,13 @@ namespace UtilityApp
             // });
             // foreach (var item in a)
             //     Console.WriteLine(item);
+            //Console.WriteLine(genApi.generate(new apiModel
+            //{
+            //    count = 4,
+            //    length = new List<int> { 20, 8, 2, 12 },
+            //    specialCharacters = false,
+            //    uppercaseCharacters = false
+            //}));
 
 
 

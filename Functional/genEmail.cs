@@ -8,7 +8,7 @@ namespace UtilityApp.Functional
         {
             Random random = new Random();
 
-            string name = new string(Enumerable.Repeat(Data.chars, model.length)
+            string name = new string(Enumerable.Repeat(Data.charsUppercase + Data.chars, model.length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
 
             if (string.IsNullOrWhiteSpace(model.domain))

@@ -21,8 +21,6 @@ namespace UtilityApp.Functional
                 default:
                     throw new ArgumentException($"Unsupported text type: {model.type}");
             }
-
-            return string.Empty;
         }
     }
 }

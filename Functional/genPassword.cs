@@ -7,7 +7,7 @@ namespace UtilityApp.Functional
         public static string generate(passwordModel model)
         {
             Random random = new Random();
-            string chars = Data.chars;
+            string chars = Data.charsUppercase + Data.chars;
 
             if (model.specialCharacters) chars += Data.specialChars;
 

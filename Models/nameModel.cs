@@ -8,5 +8,6 @@
         public char separatorPrefix { get; set; } = Data.defaultSeparator;
         public char separatorSuffix { get; set; } = Data.defaultSeparator;
         public bool specialCharacters { get; set; } = Data.defaultSpecialCharacters;
+        public bool isHumanized { get; set; } = false;
     }
 }
