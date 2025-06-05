@@ -1,5 +1,5 @@
-﻿using UtilityApp.Functional;
-using UtilityApp.Models;
+﻿using Spectre.Console;
+using Spectre.Console.Rendering;
 
 namespace UtilityApp.Interface
 {
@@ -7,19 +7,7 @@ namespace UtilityApp.Interface
     {
         public static void Animate()
         {
-            string animation = @"
-             _                          _   _ _   _ _ _ _          
-   / \   ___| |_ _ __ _   _ _ __ ___   | | | | |_(_) (_) |_ _   _ 
-  / _ \ / __| __| '__| | | | '_ ` _ \  | | | | __| | | | __| | | |
- / ___ \\__ \ |_| |  | |_| | | | | | | | |_| | |_| | | | |_| |_| |
-/_// \\_\___/\__|_|   \__,_|_| |_| |_|  \___/ \__|_|_|_|\__|\__, |
-  / _ \ | '_ \| '_ \                                        |___/ 
- / ___ \| |_) | |_) |                                             
-/_/   \_\ .__/| .__/                                              
-        |_|   |_|         
-            ";
-
-            string logo = @"
+            var logo = @"
 MMMMMMMMN0dc'.,lkKWMMMMWk;.':d0NWMMMMMMM
 MMMMMNOo;..'::,..'cdk0NWNOd:'..;oONMMMMM
 MMMMMO,.,cx0NWXOo:'..';oOXWNKx:..,OMMMMM
@@ -40,121 +28,91 @@ MMMMMO,.'xXWWKxc,..,:lxKWMWWWXOo:;OMMMMM
 MMMMMXo,..;lkKWWKkl;'..'cdkxl;..'lKMMMMM
 MMMMMMWKkl;..'cOWMWNKOd:'....;lkKWMMMMMM
 MMMMMMMMMWKd;';kWMMMMMMNk:';dKWMMMMMMMMM
+MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
 ";
 
-            string[] logoLines = logo.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-            string[] animationLines = animation.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            string logoText = @"
+             _                         _   _ _   _ _ _ _
+   / \   ___| |_ _ __ _   _ _ __ ___  | | | | |_(_) (_) |_ _   _
+  / _ \ / __| __| '__| | | | '_ ` _ \ | | | | __| | | | __| | | |
+ / ___ \\__ \ |_| |  | |_| | | | | | || |_| | |_| | | | |_| |_| |
+/_// \\_\___/\__|_|   \__,_|_| |_| |_| \___/ \__|_|_|_|\__|\__, |
+  / _ \ | '_ \| '_ \                                        |___/
+ / ___ \| |_) | |_) |
+/_/   \_\ .__/| .__/
+        |_|   |_|
+";
 
-            int logoHeight = logoLines.Length;
-            int animationHeight = animationLines.Length;
+            var logoMarkup = new Markup(logo);
+            var logoTextMarkup = new Markup(logoText);
 
-            int topPadding = (logoHeight - animationHeight) / 2;
-            if (topPadding < 0) topPadding = 0;
+            var grid = new Grid();
+            grid.AddColumn(); // For the logo
+            grid.AddColumn(); // For the logo text
+            grid.AddRow(logoMarkup, logoTextMarkup);
 
-            int logoWidth = 0;
-            foreach (var line in logoLines)
-                if (line.Length > logoWidth) logoWidth = line.Length;
+            var logoPanel = new Panel(grid)
+                .Border(BoxBorder.Rounded)
+                .Expand();
 
-            int maxLines = Math.Max(logoHeight, animationHeight + topPadding);
-
-            for (int i = 0; i < maxLines; i++)
-            {
-                string logoLine = i < logoHeight ? logoLines[i].TrimEnd('\r') : new string(' ', logoWidth);
-
-                string animationLine = "";
-                if (i >= topPadding && i < topPadding + animationHeight)
-                {
-                    animationLine = animationLines[i - topPadding].TrimEnd('\r');
-                }
-
-                Console.WriteLine(logoLine.PadRight(logoWidth + 4) + animationLine);
-                Thread.Sleep(150);
-            }
-            Console.WriteLine($"");
+            AnsiConsole.Clear();
+            AnsiConsole.Write(logoPanel);
         }
 
         public static void ShowMenu()
         {
             while (true)
             {
-                Console.WriteLine();
-                string menu = @"
-1. gen. Name     2. gen. Password   3. gen. Email   4. gen. Account
-5. gen. Key      6. gen. Phone      7. gen. Text    8. gen. Hash
-9. gen. Tunnel   10. Exit
-                ";
+                Animate();
 
-                string[] menuLines = menu.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (var line in menuLines)
-                {
-                    string trimmedLine = line.TrimEnd('\r').Trim();
-                    if (trimmedLine.Length == 0) continue;
-
-                    foreach (char c in line)
-                    {
-                        Console.Write(c);
-                        Thread.Sleep(15);
-                    }
-                    Console.WriteLine();
-                    Thread.Sleep(150);
-                }
-
-                Console.Write("Select menu item (1-9): ");
-                string choice = Console.ReadLine();
+                var choice = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[bold yellow]Выберите действие:[/]")
+                        .PageSize(10)
+                        .AddChoices(
+                            "1. Name", "2. Password", "3. Email", "4. Account",
+                            "5. Key", "6. Phone", "7. Text", "8. Hash",
+                            "9. Tunnel", "Exit"
+                        )
+                );
 
                 switch (choice)
                 {
-                    case "1":
+                    case "1. Name":
                         geName.run();
-                        awaitUserInput();
                         break;
-                    case "2":
+                    case "2. Password":
                         gePassword.run();
-                        awaitUserInput();
                         break;
-                    case "3":
+                    case "3. Email":
                         geEmail.run();
-                        awaitUserInput();
                         break;
-                    case "4":
+                    case "4. Account":
                         geAccount.run();
-                        awaitUserInput();
                         break;
-                    case "5":
+                    case "5. Key":
                         geKey.run();
-                        awaitUserInput();
                         break;
-                    case "6":
+                    case "6. Phone":
                         gePhone.run();
-                        awaitUserInput();
                         break;
-                    case "7":
+                    case "7. Text":
                         geText.run();
-                        awaitUserInput();
                         break;
-                    case "8":
+                    case "8. Hash":
                         geHash.run();
-                        awaitUserInput();
                         break;
-                    case "9":
+                    case "9. Tunnel":
                         geTunnel.run();
-                        awaitUserInput();
                         break;
-                    case "10":
+                    case "   Exit":
+                        AnsiConsole.MarkupLine("[yellow]Выход...[/]");
                         return;
-                    default:
-                        Console.WriteLine("This item is not avaliable now.");
-                        break;
                 }
-                Console.Clear();
-            }
-        }
 
-        public static void awaitUserInput()
-        {
-            Console.WriteLine("Press return to continue...");
-            Console.Read();
+                AnsiConsole.MarkupLine("\n[grey]Нажми Enter для возврата в меню...[/]");
+                Console.ReadLine();
+            }
         }
     }
 }
