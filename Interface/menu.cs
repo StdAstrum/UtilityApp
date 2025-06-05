@@ -72,7 +72,7 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                         .AddChoices(
                             "1. Name", "2. Password", "3. Email", "4. Account",
                             "5. Key", "6. Phone", "7. Text", "8. Hash",
-                            "9. Tunnel", "Exit"
+                            "9. Tunnel", "10. Exit"
                         )
                 );
 
@@ -105,7 +105,7 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                     case "9. Tunnel":
                         geTunnel.run();
                         break;
-                    case "   Exit":
+                    case "10. Exit":
                         AnsiConsole.MarkupLine("[yellow]Выход...[/]");
                         return;
                 }
