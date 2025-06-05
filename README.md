@@ -40,7 +40,8 @@ AstrumUtilityApp is a multifunctional, console-based data generator designed for
 
 ## Example
 
-![изображение_2025-06-04_041053644](https://github.com/user-attachments/assets/3988b2d2-f0cc-44d3-a799-5e60b9721f9a)
+![image](https://github.com/user-attachments/assets/0767673b-1ae4-47eb-aecf-3f1694df34df)
+![image](https://github.com/user-attachments/assets/5f5c15b2-5baa-4ac8-96c6-be73847aa46a)
 
 ---
 
