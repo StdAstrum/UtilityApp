@@ -83,7 +83,8 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                 table.AddRow(new Markup("[fuchsia on grey19]📝 7. Текст[/]"), new Markup("[grey on grey19]Создать случайный текст[/]"));
                 table.AddRow(new Markup("[lime]🔒 8. Хэш[/]"), new Markup("[grey]Создать хэш-значение[/]"));
                 table.AddRow(new Markup("[teal on grey19]🌐 9. Туннель[/]"), new Markup("[grey on grey19]Настроить сетевой туннель[/]"));
-                table.AddRow(new Markup("[red]🚪 10. Выход[/]"), new Markup("[grey]Выйти из приложения[/]"));
+                table.AddRow(new Markup("[yellow]🔗 10. Api[/]"), new Markup("[grey]Создать API ключ[/]"));
+                table.AddRow(new Markup("[red]🚪 11. Выход[/]"), new Markup("[grey]Выйти из приложения[/]"));
 
                 // Создать панель для таблицы с желтым заголовком
                 var panel = new Panel(table)
@@ -110,13 +111,13 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                 // Запрос выбора с поддержкой горячих клавиш
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
-                        .Title("[grey]Используйте стрелки или цифровые клавиши (1-10) и Enter для выбора:[/]")
+                        .Title("[grey]Используйте стрелки или цифровые клавиши (1-9, 0, q) и Enter для выбора:[/]")
                         .PageSize(10)
                         .HighlightStyle(new Style(foreground: Color.White, background: Color.Blue))
                         .AddChoices(
                             "1. Имя", "2. Пароль", "3. Email", "4. Аккаунт",
                             "5. Ключ", "6. Телефон", "7. Текст", "8. Хэш",
-                            "9. Туннель", "10. Выход"
+                            "9. Туннель", "10. Api", "11. Выход"
                         )
                         .UseConverter(option => option switch
                         {
@@ -129,7 +130,8 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                             "7. Текст" => "📝 7. Текст",
                             "8. Хэш" => "🔒 8. Хэш",
                             "9. Туннель" => "🌐 9. Туннель",
-                            "10. Выход" => "🚪 10. Выход",
+                            "10. Api" => "🔗 10. Api",
+                            "11. Выход" => "🚪 11. Выход",
                             _ => option
                         })
                 );
@@ -149,7 +151,8 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                         '7' => "7. Текст",
                         '8' => "8. Хэш",
                         '9' => "9. Туннель",
-                        '0' => "10. Выход",
+                        '0' => "10. Api",
+                        'q' => "11. Выход",
                         _ => choice // Возврат к выбору через prompt
                     };
                     // Очистить оставшийся ввод
@@ -188,7 +191,10 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                     case "9. Туннель":
                         geTunnel.run();
                         break;
-                    case "10. Выход":
+                    case "10. Api":
+                        geApi.run();
+                        break;
+                    case "11. Выход":
                         AnsiConsole.MarkupLine("[yellow]Выход...[/]");
                         return;
                 }

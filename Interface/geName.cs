@@ -1,34 +1,45 @@
 using UtilityApp.Functional;
 using UtilityApp.Models;
 
-namespace UtilityApp.Interface 
+namespace UtilityApp.Interface
 {
-class geName
-{
-    public static void run()
+    class geName
     {
-        Console.Write("Enter the length of name: ");
-        int length = int.Parse(Console.ReadLine() ?? "10");
+        public static void run()
+        {
+            Console.Write("Хотите гуманизированное имя? (д/н): ");
+            string humanizedInput = Console.ReadLine()?.Trim().ToLower();
+            bool isHumanized = humanizedInput == "y" || humanizedInput == "да" || humanizedInput == "д" || humanizedInput == "yes";
+            
+            Console.Write("Введите длину имени: ");
+            int length = int.Parse(Console.ReadLine() ?? "10");
 
-        Console.Write("Enter prefix (Press return to skip): ");
-        string prefix = Console.ReadLine() ?? "";
+            Console.Write("Введите префикс (нажмите Enter, чтобы пропустить): ");
+            string prefix = Console.ReadLine() ?? "";
 
-        Console.Write("Enter suffix (Press return to skip): ");
-        string suffix = Console.ReadLine() ?? "";
+            Console.Write("Введите суффикс (нажмите Enter, чтобы пропустить): ");
+            string suffix = Console.ReadLine() ?? "";
 
-        Console.Write("Do you want to add a special characters? (y/n): ");
-        string specialInput = Console.ReadLine()?.Trim().ToLower();
-        bool specialCharacters = specialInput == "y" || specialInput == "yes";
+            bool specialCharacters = false;
+            if (!isHumanized)
+            {
+                Console.Write("Хотите добавить специальные символы? (д/н): ");
+                string specialInput = Console.ReadLine()?.Trim().ToLower();
+                specialCharacters = specialInput == "д" || specialInput == "да" || specialInput == "y" || specialInput == "yes";
+            }
 
-        nameModel model = new nameModel();
-        model.length = length;
-        model.prefix = prefix;
-        model.suffix = suffix;
-        model.separatorPrefix = '_';
-        model.separatorSuffix = '>';
-        model.specialCharacters = specialCharacters;
+            nameModel model = new nameModel
+            {
+                length = length,
+                prefix = prefix,
+                suffix = suffix,
+                separatorPrefix = '_',
+                separatorSuffix = '>',
+                specialCharacters = specialCharacters,
+                isHumanized = isHumanized
+            };
 
-        Console.WriteLine($"Generated User Name: {genName.generate(model)}");
+            Console.WriteLine($"Сгенерированное имя пользователя: {genName.generate(model)}");
+        }
     }
-}
 }
