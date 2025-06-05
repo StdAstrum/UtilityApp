@@ -35,6 +35,7 @@ namespace UtilityApp
                 Console.WriteLine($"An error occurred: {ex.Message}");
                 Console.WriteLine(ex.StackTrace);
             }
+            Console.Clear();
         }
     }
 }
