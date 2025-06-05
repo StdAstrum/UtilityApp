@@ -7,23 +7,23 @@ namespace UtilityApp.Interface
     {
         public static void run()
         {
-            Console.Write("Хотите гуманизированное имя? (д/н): ");
+            Console.Write("Do you want a humanized name?? (y/n): ");
             string humanizedInput = Console.ReadLine()?.Trim().ToLower();
             bool isHumanized = humanizedInput == "y" || humanizedInput == "да" || humanizedInput == "д" || humanizedInput == "yes";
             
-            Console.Write("Введите длину имени: ");
+            Console.Write("Enter name length: ");
             int length = int.Parse(Console.ReadLine() ?? "10");
 
-            Console.Write("Введите префикс (нажмите Enter, чтобы пропустить): ");
+            Console.Write("Enter prefix (press return to skip): ");
             string prefix = Console.ReadLine() ?? "";
 
-            Console.Write("Введите суффикс (нажмите Enter, чтобы пропустить): ");
+            Console.Write("Enter suffix (press return to skip): ");
             string suffix = Console.ReadLine() ?? "";
 
             bool specialCharacters = false;
             if (!isHumanized)
             {
-                Console.Write("Хотите добавить специальные символы? (д/н): ");
+                Console.Write("Want to add special characters? (y/n): ");
                 string specialInput = Console.ReadLine()?.Trim().ToLower();
                 specialCharacters = specialInput == "д" || specialInput == "да" || specialInput == "y" || specialInput == "yes";
             }
@@ -39,7 +39,7 @@ namespace UtilityApp.Interface
                 isHumanized = isHumanized
             };
 
-            Console.WriteLine($"Сгенерированное имя пользователя: {genName.generate(model)}");
+            Console.WriteLine($"Generated username: {genName.generate(model)}");
         }
     }
 }

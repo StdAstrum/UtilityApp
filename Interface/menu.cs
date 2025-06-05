@@ -60,7 +60,7 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                 AnsiConsole.Status()
                     .Spinner(Spinner.Known.Star)
                     .SpinnerStyle(Style.Parse("yellow bold"))
-                    .Start("Загрузка меню...", ctx =>
+                    .Start("Loading menu...", ctx =>
                     {
                         System.Threading.Thread.Sleep(800); // Короткая пауза для плавного перехода
                     });
@@ -69,39 +69,39 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                 var table = new Table()
                     .Border(TableBorder.Rounded)
                     .BorderColor(Color.Green)
-                    .AddColumn(new TableColumn("[bold yellow]Опция[/]").Centered())
-                    .AddColumn(new TableColumn("[bold yellow]Описание[/]").Centered())
+                    .AddColumn(new TableColumn("[bold yellow]Option[/]").Centered())
+                    .AddColumn(new TableColumn("[bold yellow]Description[/]").Centered())
                     .Width(80); // Фиксированная ширина для центрирования
 
                 // Добавить опции меню с иконками, цветами и описаниями, с чередующимся фоном
-                table.AddRow(new Markup("[cyan on grey19]➤ 1. Имя[/]"), new Markup("[grey on grey19]Создать имя пользователя[/]"));
-                table.AddRow(new Markup("[blue]★ 2. Пароль[/]"), new Markup("[grey]Создать безопасный пароль[/]"));
-                table.AddRow(new Markup("[purple on grey19]✉ 3. Email[/]"), new Markup("[grey on grey19]Создать адрес электронной почты[/]"));
-                table.AddRow(new Markup("[green]⚙ 4. Аккаунт[/]"), new Markup("[grey]Создать профиль аккаунта[/]"));
-                table.AddRow(new Markup("[yellow on grey19]🔑 5. Ключ[/]"), new Markup("[grey on grey19]Создать ключи шифрования[/]"));
-                table.AddRow(new Markup("[aqua]📞 6. Телефон[/]"), new Markup("[grey]Создать номер телефона[/]"));
-                table.AddRow(new Markup("[fuchsia on grey19]📝 7. Текст[/]"), new Markup("[grey on grey19]Создать случайный текст[/]"));
-                table.AddRow(new Markup("[lime]🔒 8. Хэш[/]"), new Markup("[grey]Создать хэш-значение[/]"));
-                table.AddRow(new Markup("[teal on grey19]🌐 9. Туннель[/]"), new Markup("[grey on grey19]Настроить сетевой туннель[/]"));
-                table.AddRow(new Markup("[yellow]🔗 10. Api[/]"), new Markup("[grey]Создать API ключ[/]"));
-                table.AddRow(new Markup("[red]🚪 11. Выход[/]"), new Markup("[grey]Выйти из приложения[/]"));
+                table.AddRow(new Markup("[cyan on grey19]➤ 1. Name[/]"), new Markup("[grey on grey19]Create a username[/]"));
+                table.AddRow(new Markup("[blue]★ 2. Password[/]"), new Markup("[grey]Create a secure password[/]"));
+                table.AddRow(new Markup("[purple on grey19]✉ 3. Email[/]"), new Markup("[grey on grey19]Create an email address[/]"));
+                table.AddRow(new Markup("[green]⚙ 4. Account[/]"), new Markup("[grey]Create an account profile[/]"));
+                table.AddRow(new Markup("[yellow on grey19]🔑 5. Key[/]"), new Markup("[grey on grey19]Create encryption keys[/]"));
+                table.AddRow(new Markup("[aqua]📞 6. Phone[/]"), new Markup("[grey]Create a phone number[/]"));
+                table.AddRow(new Markup("[fuchsia on grey19]📝 7. Text[/]"), new Markup("[grey on grey19]Create random text[/]"));
+                table.AddRow(new Markup("[lime]🔒 8. Hash[/]"), new Markup("[grey]Create a hash value[/]"));
+                table.AddRow(new Markup("[teal on grey19]🌐 9. Tunnel[/]"), new Markup("[grey on grey19]Set up a network tunnel[/]"));
+                table.AddRow(new Markup("[yellow]🔗 10. Api[/]"), new Markup("[grey]Create an API key[/]"));
+                table.AddRow(new Markup("[red]🚪 11. Exit[/]"), new Markup("[grey]Quit the application[/]"));
 
                 // Создать панель для таблицы с желтым заголовком
                 var panel = new Panel(table)
-                    .Header("[yellow bold]Меню Astrum Utility[/]")
+                    .Header("[yellow bold]Menu Astrum Utility[/]")
                     .Border(BoxBorder.Double)
                     .BorderColor(Color.Yellow)
                     .Expand()
                     .Padding(2, 2, 2, 2); // Увеличенный отступ для баланса
 
                 // Добавить нижний колонтитул
-                var footer = new Markup("[grey italic]Astrum Utility v1.0 | Работает на Spectre.Console[/]")
+                var footer = new Markup("[grey italic]Astrum Utility v1.0 | Powered by Spectre.Console[/]")
                     .Centered();
 
                 // Очистить консоль и отобразить меню
                 AnsiConsole.Clear();
                 AnsiConsole.WriteLine();
-                AnsiConsole.Write(new FigletText("Меню")
+                AnsiConsole.Write(new FigletText("Menu")
                     .Centered()
                     .Color(Color.Green));
                 AnsiConsole.Write(panel);
@@ -111,27 +111,27 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                 // Запрос выбора с поддержкой горячих клавиш
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
-                        .Title("[grey]Используйте стрелки или цифровые клавиши (1-9, 0, q) и Enter для выбора:[/]")
+                        .Title("[grey]Use arrow keys or number keys (1-9, 0, q) and Enter for selection:[/]")
                         .PageSize(10)
                         .HighlightStyle(new Style(foreground: Color.White, background: Color.Blue))
                         .AddChoices(
-                            "1. Имя", "2. Пароль", "3. Email", "4. Аккаунт",
-                            "5. Ключ", "6. Телефон", "7. Текст", "8. Хэш",
-                            "9. Туннель", "10. Api", "11. Выход"
+                            "1. ​​Name", "2. Password", "3. Email", "4. Account",
+                            "5. Key", "6. Phone", "7. Text", "8. Hash",
+                            "9. Tunnel", "10. Api", "11. Exit"
                         )
                         .UseConverter(option => option switch
                         {
-                            "1. Имя" => "➤ 1. Имя",
-                            "2. Пароль" => "★ 2. Пароль",
+                            "1. Name" => "➤ 1. Name",
+                            "2. Password" => "★ 2. Password",
                             "3. Email" => "✉ 3. Email",
-                            "4. Аккаунт" => "⚙ 4. Аккаунт",
-                            "5. Ключ" => "🔑 5. Ключ",
-                            "6. Телефон" => "📞 6. Телефон",
-                            "7. Текст" => "📝 7. Текст",
-                            "8. Хэш" => "🔒 8. Хэш",
-                            "9. Туннель" => "🌐 9. Туннель",
+                            "4. Account" => "⚙ 4. Account",
+                            "5. Key" => "🔑 5. Key",
+                            "6. Phone" => "📞 6. Phone",
+                            "7. Text" => "📝 7. Text",
+                            "8. Hash" => "🔒 8. Hash",
+                            "9. Tunnel" => "🌐 9. Tunnel",
                             "10. Api" => "🔗 10. Api",
-                            "11. Выход" => "🚪 11. Выход",
+                            "11. Exit" => "🚪 11. Exit",
                             _ => option
                         })
                 );
@@ -142,18 +142,18 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
                     var key = Console.ReadKey(true);
                     choice = key.KeyChar switch
                     {
-                        '1' => "1. Имя",
-                        '2' => "2. Пароль",
+                        '1' => "1. Name",
+                        '2' => "2. Password",
                         '3' => "3. Email",
-                        '4' => "4. Аккаунт",
-                        '5' => "5. Ключ",
-                        '6' => "6. Телефон",
-                        '7' => "7. Текст",
-                        '8' => "8. Хэш",
-                        '9' => "9. Туннель",
+                        '4' => "4. Account",
+                        '5' => "5. Key",
+                        '6' => "6. Phone",
+                        '7' => "7. Text",
+                        '8' => "8. Hash",
+                        '9' => "9. Tunnel",
                         '0' => "10. Api",
-                        'q' => "11. Выход",
-                        _ => choice // Возврат к выбору через prompt
+                        'q' => "11. Exit",
+                        _ => choice
                     };
                     // Очистить оставшийся ввод
                     while (Console.KeyAvailable)
@@ -164,42 +164,42 @@ MMMMMMMMMMMMNOc;xWMMMMMMMWKd0WMMMMMMMMMM
 
                 switch (choice)
                 {
-                    case "1. Имя":
+                    case "1. Name":
                         geName.run();
                         break;
-                    case "2. Пароль":
+                    case "2. Password":
                         gePassword.run();
                         break;
                     case "3. Email":
                         geEmail.run();
                         break;
-                    case "4. Аккаунт":
+                    case "4. Account":
                         geAccount.run();
                         break;
-                    case "5. Ключ":
+                    case "5. Key":
                         geKey.run();
                         break;
-                    case "6. Телефон":
+                    case "6. Phone":
                         gePhone.run();
                         break;
-                    case "7. Текст":
+                    case "7. Text":
                         geText.run();
                         break;
-                    case "8. Хэш":
+                    case "8. Hash":
                         geHash.run();
                         break;
-                    case "9. Туннель":
+                    case "9. Tunnel":
                         geTunnel.run();
                         break;
                     case "10. Api":
                         geApi.run();
                         break;
-                    case "11. Выход":
-                        AnsiConsole.MarkupLine("[yellow]Выход...[/]");
+                    case "11. Exit":
+                        AnsiConsole.MarkupLine("[yellow]Exit...[/]");
                         return;
                 }
 
-                AnsiConsole.MarkupLine("\n[grey]Нажми Enter для возврата в меню...[/]");
+                AnsiConsole.MarkupLine("\n[grey]Press return to return to the menu...[/]");
                 // Очистить буфер ввода перед чтением
                 while (Console.KeyAvailable)
                 {
